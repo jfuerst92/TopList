@@ -1,6 +1,7 @@
 # TopList
 
 By: Joseph Fuerst
+
 WORK IN PROGRESS
 
 An android app that allows you to rate, and get rated by other users based on a selfie that you upload. Uses Google App engine 
