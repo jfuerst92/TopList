@@ -44,7 +44,7 @@ public class ImgViewActivity extends AppCompatActivity {
         final ImageView imgView = (ImageView) findViewById(R.id.imgView);
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
                 getApplicationContext(),
-                "us-west-2:95a08035-c549-4a19-8018-31571e045f67", // Identity Pool ID
+                "REMOVED", // Identity Pool ID
                 Regions.US_WEST_2 // Region
         );
 
