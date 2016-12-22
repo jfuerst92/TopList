@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.tl.joe.toplist.MenuActivty">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etLikes"
+        android:layout_marginTop="24dp"
+        android:text="sdsd"
+        android:background="@android:color/background_light"
+        android:autoText="true"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/etWelcome"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etDis"
+        android:text="You are currently rated in the top Xth percentile!"
+        android:background="@android:color/background_light"
+        android:autoText="true"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/etLikes"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload New Picture"
+        android:id="@+id/goToPic"
+        android:layout_below="@+id/etDis"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp" />
+
+    <Button
+        android:text="View Active Picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewImg"
+        android:layout_below="@+id/goToPic"
+        android:layout_alignEnd="@+id/goToPic" />
+
+    <Button
+        android:text="Delete Account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="39dp"
+        android:id="@+id/etDel"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/bLogout"
+        android:layout_alignEnd="@+id/bLogout" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Begin Rating"
+        android:id="@+id/goToRate"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/viewImg"
+        android:layout_alignEnd="@+id/viewImg" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        android:id="@+id/bLogout"
+        android:layout_above="@+id/etDel"
+        android:layout_marginBottom="20dp"
+        android:layout_alignStart="@+id/goToPic"
+        android:layout_alignEnd="@+id/goToRate" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/etWelcome"
+        android:text="Welcome, user!"
+        android:background="@android:color/background_light"
+        android:textColor="@android:color/black"
+        android:textAlignment="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

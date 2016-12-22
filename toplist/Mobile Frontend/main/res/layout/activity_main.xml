@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#227793">
+
+
+    <ImageView
+        android:id="@+id/portraitView"
+        android:scaleType="centerInside"
+        android:src="@drawable/angrydoggo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true" />
+
+    //android:layout_below="@+id/titleLabel"
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:textSize="40sp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Angry Dog"
+
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:background="#77000000"
+        android:textColor="#FFFFFF" />
+
+    //android:layout_below="@id/titleLabel"
+
+    <TextView
+        android:id="@+id/descriptionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Cutie Ratio: 1.65"
+        android:textSize="20sp"
+        android:background="#77000000"
+        android:textColor="#FFFFFF"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="0dp"
+        android:layout_below="@+id/nameTextView" />
+    <Space
+        android:id="@+id/bottomBuffer"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_alignParentBottom="true"/>
+    <Button
+        android:id="@+id/yesButton"
+        android:textSize="30sp"
+        android:padding="20dp"
+        android:textColor="#FFFFFF"
+        android:text="Like"
+        android:background="#B24261"
+        android:layout_margin="20dp"
+        android:layout_above="@id/bottomBuffer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:padding="20dp"
+        android:textColor="#FFFFFF"
+        android:text="Dislike"
+        android:background="#B24261"
+        android:layout_marginRight="20dp"
+        android:id="@+id/noButton"
+        android:layout_alignBottom="@+id/yesButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <!--
+    <Button
+        android:id="@+id/noButton"
+        android:textSize="30sp"
+        android:padding="20dp"
+        android:textColor="#FFFFFF"
+        android:text="Not Cute"
+        android:background="#B24261"
+        android:layout_margin="20dp"
+        android:layout_above="@id/bottomBuffer"
+        android:layout_width="wrap_content"
+        android:layout_alignLeft="@id/nextButton"
+        android:layout_height="wrap_content"></Button>
+      -->
+    <!--
+    <RatingBar
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingView"
+        android:layout_above="@id/nextButton"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp" />
+
+    -->
+
+
+
+
+</RelativeLayout>
