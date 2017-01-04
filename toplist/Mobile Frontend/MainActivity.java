@@ -134,10 +134,7 @@ public class MainActivity extends Activity {
 
 
 
-        //RPerson1 = new PAdapter(this,nameTextView,descriptionTextView,portraitView);
-        //RPerson1.set(dogs[0]);
-        //catAdapter = new CatAdapter(this,nameTextView,descriptionTextView,ratingView,portraitView);
-        //catAdapter.set(AdoptData.mCatList.get(0));
+        
 
     }
 
