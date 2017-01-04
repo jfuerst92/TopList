@@ -19,5 +19,8 @@ Make image upload mandatory. (Image upload activity included during registration
 
 Implement aesthetic and usability improvements. (Make it look nice. Make sure users don't get frustrated/confused)
 
+Switch database from ndb to a SQL database for the purposes of better relational management. (necessary as cost-cutting measure and better implementation of leaderboards.)
+
+Implement leaderboards
 
 
