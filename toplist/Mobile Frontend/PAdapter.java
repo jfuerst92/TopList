@@ -1,5 +1,7 @@
 package com.tl.joe.toplist;
 
+
+//THIS CLASS IS DEPRECATED. NOT FOR USE AND WILL BE REMOVED BEFORE RELEASE
 import android.app.Activity;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -39,9 +41,9 @@ public class PAdapter {
     }
 
     private void updateView(){
-        int resID = t.getImageResourceId(activity);
-        imageView.setImageResource(resID);
+        //int resID = t.getImageResourceId(activity);
+        //imageView.setImageResource(resID);
         name.setText(t.getfName());
-        description.setText(t.getRateRatio());
+        //description.setText(t.getRateRatio());
     }
 }

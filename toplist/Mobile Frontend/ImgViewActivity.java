@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import com.amazonaws.services.s3.AmazonS3Client;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -30,6 +33,8 @@ public class ImgViewActivity extends AppCompatActivity {
 
     String imgFName;
     File iFile = null;
+    Bitmap bmp = null;
+    ImageView view;
 
     private static final String TAG = "image view";
     public static final String PREFS_NAME = "MyPrefsFile";
@@ -42,9 +47,10 @@ public class ImgViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_img_view);
 
         final ImageView imgView = (ImageView) findViewById(R.id.imgView);
+        view = imgView;
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
                 getApplicationContext(),
-                "REMOVED", // Identity Pool ID
+                "us-west-2:95a08035-c549-4a19-8018-31571e045f67", // Identity Pool ID
                 Regions.US_WEST_2 // Region
         );
 
@@ -53,9 +59,13 @@ public class ImgViewActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         String img = prefs.getString("curImg", null);
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        String url = "http://d3iduo04y2kezb.cloudfront.net/" + img;
+        SendfeedbackJob job = new SendfeedbackJob();
+        job.execute(url);
 
-
-
+ //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        /*
         try {
             iFile = createImageFile();
         } catch (IOException ex) {
@@ -64,17 +74,18 @@ public class ImgViewActivity extends AppCompatActivity {
 
         }
         Log.i(TAG, "&&&&&&&&&&THE KEY IS " + img);
+        Toast.makeText(getApplicationContext(), "Loading", Toast.LENGTH_LONG).show();
         TransferObserver observer = transferUtility.download(
-                "496demobucket",     /* The bucket to download from */
-                img,    /* The key for the object to download */
-                iFile        /* The file to download the object to */
+                "496demobucket",     // The bucket to download from
+                img,    // The key for the object to download
+                iFile        // The file to download the object to
         );
         observer.setTransferListener(new TransferListener() {
             public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
                 // update progress bar
                 //progressBar.setProgress(bytesCurrent);
                 Log.i(TAG, "progress changed");
-                Toast.makeText(getApplicationContext(), "Loading", Toast.LENGTH_LONG).show();
+
             }
 
             public void onStateChanged(int id, TransferState state) {
@@ -87,9 +98,11 @@ public class ImgViewActivity extends AppCompatActivity {
                 Log.e("ERROR", ex.getMessage(), ex);
             }
         });
-
+        */
     }
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     String mCurrentPhotoPath;
 
     public static Bitmap rotateBitmap(Bitmap source, float angle)
@@ -117,5 +130,44 @@ public class ImgViewActivity extends AppCompatActivity {
         //img = image;
         Log.i(TAG, "Image created and returned");
         return image;
+    }
+
+    public void setImage(Bitmap b){
+        view.setImageBitmap(b);
+    }
+
+    private class SendfeedbackJob extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(String[] params) {
+
+            return getBitmapFromURL(params[0]);
+
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bit) {
+            setImage(bit);
+
+
+        }
+
+        public Bitmap getBitmapFromURL(String src) {
+            try {
+                java.net.URL url = new java.net.URL(src);
+                HttpURLConnection connection = (HttpURLConnection) url
+                        .openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                Bitmap myBitmap = BitmapFactory.decodeStream(input);
+                return myBitmap;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
     }
 }

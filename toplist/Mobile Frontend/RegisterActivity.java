@@ -41,7 +41,7 @@ import org.json.*;
 
 
 public class RegisterActivity extends AppCompatActivity {
-    private static final String TAG = "httprequest";
+    private static final String TAG = "RegisterActivity";
     public static final String PREFS_NAME = "MyPrefsFile";
     public RequestParams signup;
 
@@ -169,12 +169,13 @@ public class RegisterActivity extends AppCompatActivity {
                 String key = "";
                 try {
                     key = response.getString("key");
-                    Log.i(TAG, key);
+                    Log.i(TAG, "NOW the key is" + key);
                 } catch (JSONException e) {
 
                 }
                 SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
                 SharedPreferences.Editor editor = settings.edit();
+                Log.i(TAG, "The user key is:" + key);
                 editor.putString("key", key);
                 editor.commit();
                 Toast.makeText(getApplicationContext(), "Registration Successful!", Toast.LENGTH_LONG).show();

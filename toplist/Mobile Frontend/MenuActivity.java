@@ -29,6 +29,7 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -79,7 +80,7 @@ public class MenuActivity extends AppCompatActivity {
 
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
                 getApplicationContext(),
-                "REMOVED", // Identity Pool ID
+                "us-west-2:95a08035-c549-4a19-8018-31571e045f67", // Identity Pool ID
                 Regions.US_WEST_2 // Region
         );
 
@@ -93,7 +94,7 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
-                Log.i(TAG, response.toString());
+                Log.i(TAG, "The response is:" + response.toString());
                 Log.i(TAG, "Success for get");
                 String key = "empty";
                 String pic = "";
@@ -306,10 +307,13 @@ public class MenuActivity extends AppCompatActivity {
             Log.i("ERROR", "The file is empty");
         }
         else {
+
             TransferObserver observer = transferUtility.upload(
                     "496demobucket",     // The bucket to upload to
+                    //"toplistbucket",
                     imgName,    // The key for the uploaded object
-                    img        // The file where the data to upload exists
+                    img,        // The file where the data to upload exists
+                    CannedAccessControlList.PublicReadWrite
             );
             observer.setTransferListener(new TransferListener() {
                 public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
@@ -348,11 +352,11 @@ public class MenuActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Account not found", Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText(getApplicationContext(), "Logged In", Toast.LENGTH_LONG).show();
-                    SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putString("key", response.toString());
-                    editor.commit();
+                    Toast.makeText(getApplicationContext(), "Image Uploaded", Toast.LENGTH_LONG).show();
+                    //SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                    //SharedPreferences.Editor editor = settings.edit();
+                    //editor.putString("key", response.toString());
+                    //editor.commit();
 
                 }
 

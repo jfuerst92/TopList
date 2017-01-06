@@ -4,6 +4,7 @@ package com.tl.joe.toplist;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.app.Activity;
@@ -40,6 +41,8 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -76,7 +79,20 @@ public class MainActivity extends Activity {
     private int currentSelection = 0;
     private int userSize = 10 ;
     PAdapter RPerson1;
-    
+    /*
+    public void addDogs(){
+        dogs[0] = new Ratee(1, 1,"majesticfloof", "Majestic" );
+        dogs[1] = new Ratee(1, 1,"angrydoggo", "AngryPup" );
+        dogs[2] = new Ratee(1, 1,"goodwithkids", "KidFriendly" );
+        dogs[3] = new Ratee(1, 1,"angrypuppers", "AngryPups" );
+        dogs[4] = new Ratee(1, 1,"goofwoofers", "GoofDogs" );
+        dogs[5] = new Ratee(1, 1,"huskairforce", "Pretty Fly" );
+        dogs[6] = new Ratee(1, 1,"incredulouswoofer", "Incredulous Pooch" );
+        dogs[7] = new Ratee(1, 1,"restfulhusk", "Sleepsy" );
+        dogs[8] = new Ratee(1, 1,"smooch", "gib kith" );
+        dogs[9] = new Ratee(1, 1,"sniffinflakes", "Cute Sniffer" );
+    }
+    */
 
 
     @Override
@@ -91,7 +107,7 @@ public class MainActivity extends Activity {
 
         CognitoCachingCredentialsProvider credentialsProvider = new CognitoCachingCredentialsProvider(
                 getApplicationContext(),
-                "REMOVED", // Identity Pool ID
+                "us-west-2:95a08035-c549-4a19-8018-31571e045f67", // Identity Pool ID
                 Regions.US_WEST_2 // Region
         );
 
@@ -102,9 +118,9 @@ public class MainActivity extends Activity {
         //String img = prefs.getString("curImg", null);
 
         getRandomUser();
-       // if (image != null) {
+        // if (image != null) {
         //    getImage();
-       // }
+        // }
         //update();
 
         yesButton.setOnClickListener(new View.OnClickListener() {
@@ -114,8 +130,8 @@ public class MainActivity extends Activity {
                 getRandomUser();
                 //if (image != null) {
                 //    getImage();
-               // }
-               // update();
+                // }
+                // update();
             }
         });
         noButton = (Button) findViewById(R.id.noButton);
@@ -126,19 +142,21 @@ public class MainActivity extends Activity {
                 getRandomUser();
                 //if (image != null) {
                 //    getImage();
-               // }
-               // update();
+                // }
+                // update();
 
             }
         });
 
-
-
-        
-
     }
 
     public void getImage(){
+
+        String url = "http://d3iduo04y2kezb.cloudfront.net/" + image;
+        Log.i("url is: ", url);
+        MainActivity.getPicJob job = new MainActivity.getPicJob();
+        job.execute(url);
+        /*
         try {
             iFile = createImageFile();
         } catch (IOException ex) {
@@ -148,9 +166,9 @@ public class MainActivity extends Activity {
         }
         Toast.makeText(getApplicationContext(), "Loading Image", Toast.LENGTH_LONG).show();
         TransferObserver observer = transferUtility.download(
-                "496demobucket",     /* The bucket to download from */
-                image,    /* The key for the object to download */
-                iFile        /* The file to download the object to */
+                "496demobucket",      The bucket to download from
+                image,     The key for the object to download
+                iFile         The file to download the object to
         );
         observer.setTransferListener(new TransferListener() {
             public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
@@ -176,6 +194,7 @@ public class MainActivity extends Activity {
                 update();
             }
         });
+        */
     }
 
     public void yesRate(){
@@ -253,6 +272,7 @@ public class MainActivity extends Activity {
         });
 
     }
+    /*
     public void showNext(){
         int random = currentSelection;
         while(random == currentSelection){
@@ -263,6 +283,7 @@ public class MainActivity extends Activity {
         Ratee c = dogs[random];
         RPerson1.set(c);
     }
+    */
 
     public void getRandomUser(){
         APIClient.get("user", null, new JsonHttpResponseHandler() {
@@ -318,9 +339,9 @@ public class MainActivity extends Activity {
         nameTextView.setText(fName);
         String desc = "Likes: " + upRates + "Dislikes: " + dnRates;
         descriptionTextView.setText(desc);
-        if (image != null) {
-            portraitView.setImageBitmap(bmp);
-        }
+        //if (image != null) {
+            //portraitView.setImageBitmap(bmp);
+        //}
 
     }
 
@@ -342,5 +363,47 @@ public class MainActivity extends Activity {
         //img = image;
         Log.i(TAG, "Image created and returned");
         return image;
+    }
+
+    public void setImage(Bitmap b){
+        portraitView.setImageBitmap(b);
+        Log.i(TAG, "Image set");
+    }
+
+    private class getPicJob extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(String[] params) {
+            Log.i(TAG, "dling image");
+            return getBitmapFromURL(params[0]);
+
+
+
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bit) {
+            Log.i(TAG, "image set");
+            setImage(bit);
+            update();
+
+
+        }
+
+        public Bitmap getBitmapFromURL(String src) {
+            try {
+                java.net.URL url = new java.net.URL(src);
+                HttpURLConnection connection = (HttpURLConnection) url
+                        .openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                Bitmap myBitmap = BitmapFactory.decodeStream(input);
+                return myBitmap;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
     }
 }
