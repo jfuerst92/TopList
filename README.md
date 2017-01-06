@@ -11,9 +11,9 @@ TODO:
 
 Implement secure user authentication. (Current implementation is a placeholder and NOT MEANT for use. It is completely unsecured.)
 
-Lower SDK requirement. (I've put it abnormally high. This is a simple fix.)
+SOLVED: Lower SDK requirement. (I've put it abnormally high. This was a simple fix.)
 
-Change method of image loading so that users never encounter a loading image. (create queue of images that load in the background)
+SOLVED: Change method of image loading so that users never encounter a loading image. (Access S3 images through cloudfront, rather than directly from the S3 bucket)
 
 Make image upload mandatory. (Image upload activity included during registration.)
 
