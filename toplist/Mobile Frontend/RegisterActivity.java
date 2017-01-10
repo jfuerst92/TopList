@@ -1,5 +1,9 @@
 package com.tl.joe.toplist;
-
+/***************************************************************
+ * RegisterActivity
+ * Author: Joseph Fuerst
+ * Handles user registration by sending input data into the database
+ *****************************************************************/
 
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -67,6 +71,11 @@ public class RegisterActivity extends AppCompatActivity {
         */
         Button bRegister = (Button) findViewById(R.id.regBtn);
 
+        /***************************************************************
+         * bRegister.setOnClickListener
+         * Creates the post request that sends user data to be stored in
+         * the database using APIClient class
+         *****************************************************************/
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +107,10 @@ public class RegisterActivity extends AppCompatActivity {
                 signup = params2;
 
                 APIClient.post("usersearch", params, new JsonHttpResponseHandler() {
+                    /***************************************************************
+                     * onSuccess
+                     * returns the key and indicates success. Checks whether the user exists already.
+                     *****************************************************************/
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.i(TAG, response.toString());
@@ -154,13 +167,19 @@ public class RegisterActivity extends AppCompatActivity {
 
         });
     }
-
+    /***************************************************************
+     * changeActivity
+     * Switches to the menu activity after successful registration
+     *****************************************************************/
     public void changeActivity(){
 
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }
-
+    /***************************************************************
+     * register
+     * Inserts user info to the database
+     *****************************************************************/
     public void register(){
         APIClient.post("user", signup, new JsonHttpResponseHandler() {
             @Override

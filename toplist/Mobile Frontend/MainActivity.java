@@ -1,5 +1,11 @@
 package com.tl.joe.toplist;
 
+/***************************************************************
+ * MainActivity
+ * Author: Joseph Fuerst
+ * This activity handles the main rating activity, getting random
+ * users, displaying their images, and recording the user's response.
+ *****************************************************************/
 
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -79,20 +85,7 @@ public class MainActivity extends Activity {
     private int currentSelection = 0;
     private int userSize = 10 ;
     PAdapter RPerson1;
-    /*
-    public void addDogs(){
-        dogs[0] = new Ratee(1, 1,"majesticfloof", "Majestic" );
-        dogs[1] = new Ratee(1, 1,"angrydoggo", "AngryPup" );
-        dogs[2] = new Ratee(1, 1,"goodwithkids", "KidFriendly" );
-        dogs[3] = new Ratee(1, 1,"angrypuppers", "AngryPups" );
-        dogs[4] = new Ratee(1, 1,"goofwoofers", "GoofDogs" );
-        dogs[5] = new Ratee(1, 1,"huskairforce", "Pretty Fly" );
-        dogs[6] = new Ratee(1, 1,"incredulouswoofer", "Incredulous Pooch" );
-        dogs[7] = new Ratee(1, 1,"restfulhusk", "Sleepsy" );
-        dogs[8] = new Ratee(1, 1,"smooch", "gib kith" );
-        dogs[9] = new Ratee(1, 1,"sniffinflakes", "Cute Sniffer" );
-    }
-    */
+
 
 
     @Override

@@ -1,5 +1,14 @@
 package com.tl.joe.toplist;
 
+/***************************************************************
+ * MenurActivity
+ * Author: Joseph Fuerst
+ * The main hub of the app, allows the user to navigate to any part
+ * of the app.
+ *
+ *
+ *****************************************************************/
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import java.text.SimpleDateFormat;

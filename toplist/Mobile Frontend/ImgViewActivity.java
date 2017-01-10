@@ -1,5 +1,11 @@
 package com.tl.joe.toplist;
 
+/***************************************************************
+ * ImgViewActivity
+ * Author: Joseph Fuerst
+ * Gets and displays the currently circulating picture for the user.
+ *****************************************************************/
+
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

@@ -1,5 +1,12 @@
 package com.tl.joe.toplist;
 
+/***************************************************************
+ * LoginActivity
+ * Author: Joseph Fuerst
+ * Hnadles manual user login. Process is unsecured and currently
+ * just a placeholder.
+ *****************************************************************/
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;

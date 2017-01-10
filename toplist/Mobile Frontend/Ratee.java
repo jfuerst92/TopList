@@ -3,7 +3,7 @@ package com.tl.joe.toplist;
 /**
  * Created by Joe on 9/12/2016.
  */
-
+//THIS CLASS IS DEPRECATED. NOT FOR USE AND WILL BE REMOVED BEFORE RELEASE
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
